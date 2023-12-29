@@ -12,14 +12,13 @@ public partial class InventoryData : Resource
     [Export]
     public Array<ItemData> Items = new();
 
-    [Export]
-    public int Size = 1;
-
     public void AddItem(ItemData itemData)
     {
-        if (Items.Count >= Size)
+        int nextAvailableItemSlot = getNextAvailableItemSlot();
+
+        if (nextAvailableItemSlot == -1)
         {
-            GD.PushWarning("Failed to add item, size exceeded");
+            GD.PushWarning("Failed to add item, no available slots");
             return;
         }
 
@@ -34,5 +33,18 @@ public partial class InventoryData : Resource
     {
         Items.Remove(itemData);
         EmitSignal(nameof(ItemRemoved), itemData);
+    }
+
+    private int getNextAvailableItemSlot()
+    {
+        for (int i = 0; i < Items.Count; i++)
+        {
+            if (Items[i] == null)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
