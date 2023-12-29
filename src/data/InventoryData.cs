@@ -25,7 +25,7 @@ public partial class InventoryData : Resource
         // duplicating itemData prevents premade ItemData properties from updating when making
         // changes to this item. E.g. Quantity updates
         itemData = (ItemData)itemData.Duplicate();
-        Items.Add(itemData);
+        Items[nextAvailableItemSlot] = itemData;
         EmitSignal(nameof(ItemAdded), itemData);
     }
 

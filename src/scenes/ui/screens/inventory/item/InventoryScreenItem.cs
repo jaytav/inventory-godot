@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class InventoryScreenItem : Control
+public partial class InventoryScreenItem : Button
 {
     public ItemData ItemData
     {
@@ -14,16 +14,22 @@ public partial class InventoryScreenItem : Control
     {
         GetNode<TextureRect>("Icon").Texture = null;
         GetNode<Label>("Quantity").Text = "";
+        GetNode<Control>("Detail").Hide();
     }
 
     private void onMouseEntered()
     {
-        // do something when mouse enters
+        if (ItemData == null)
+        {
+            return;
+        }
+
+        GetNode<Control>("Detail").Show();
     }
 
     private void onMouseExited()
     {
-        // do something when mouse exits
+        GetNode<Control>("Detail").Hide();
     }
 
     private void setItemData(ItemData itemData)
@@ -39,5 +45,8 @@ public partial class InventoryScreenItem : Control
         MouseDefaultCursorShape = CursorShape.PointingHand;
         GetNode<TextureRect>("Icon").Texture = ItemData.Icon;
         GetNode<Label>("Quantity").Text = ItemData.Quantity.ToString();
+        GetNode<Label>("Detail/Name").Text = ItemData.ResourceName;
+        GetNode<TextureRect>("Detail/Icon").Texture = ItemData.Icon;
+        GetNode<Label>("Detail/Description").Text = ItemData.Description;
     }
 }

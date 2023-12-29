@@ -1,19 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://7er68x6tsoyn"]
+[gd_scene load_steps=8 format=3 uid="uid://7er68x6tsoyn"]
 
 [ext_resource type="Script" path="res://src/scenes/ui/screens/inventory/item/InventoryScreenItem.cs" id="1_rc46i"]
 [ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/square.svg" id="2_bpm43"]
+[ext_resource type="Texture2D" uid="uid://dyql3gjbr5vll" path="res://assets/textures/square_outline.svg" id="3_l5qd0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5hkyq"]
+texture = ExtResource("3_l5qd0")
 
 [sub_resource type="LabelSettings" id="LabelSettings_sec0y"]
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
-[node name="InventoryScreenItem" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_cljm1"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ape2t"]
+font_size = 14
+font_color = Color(1, 1, 1, 0.784314)
+
+[node name="InventoryScreenItem" type="Button"]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
+anchors_preset = -1
 anchor_right = 0.0555556
 anchor_bottom = 0.0987654
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxTexture_5hkyq")
+toggle_mode = true
+flat = true
 script = ExtResource("1_rc46i")
 metadata/_edit_use_anchors_ = true
 
@@ -25,7 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.00005
+offset_right = -4.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -47,6 +61,7 @@ texture = ExtResource("2_bpm43")
 expand_mode = 1
 
 [node name="Quantity" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,6 +75,84 @@ grow_vertical = 2
 text = "1"
 label_settings = SubResource("LabelSettings_sec0y")
 horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Detail" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchor_left = 0.999999
+anchor_right = 5.0
+anchor_bottom = 2.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Outline" type="TextureRect" parent="Detail"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Background" type="TextureRect" parent="Detail"]
+modulate = Color(0.156863, 0.156863, 0.156863, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bpm43")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="Detail"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 16.0
+offset_bottom = 104.0
+grow_horizontal = 2
+texture = ExtResource("2_bpm43")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="Detail"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Item Name"
+label_settings = SubResource("LabelSettings_cljm1")
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Detail"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is a description"
+label_settings = SubResource("LabelSettings_ape2t")
+vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="onMouseEntered"]

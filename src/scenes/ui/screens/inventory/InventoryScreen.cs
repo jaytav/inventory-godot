@@ -15,9 +15,12 @@ public partial class InventoryScreen : Control
             return;
         }
 
+        ButtonGroup inventoryScreenItemButtonGroup = new();
+
         foreach (ItemData itemData in InventoryData.Items)
         {
             InventoryScreenItem inventoryScreenItem = _inventoryScreenItem.Instantiate<InventoryScreenItem>();
+            inventoryScreenItem.ButtonGroup = inventoryScreenItemButtonGroup;
             GetNode("Items").AddChild(inventoryScreenItem);
             inventoryScreenItem.ItemData = itemData;
         }
