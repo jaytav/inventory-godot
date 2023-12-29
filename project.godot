@@ -14,6 +14,10 @@ config/name="InventoryGodot"
 run/main_scene="res://src/scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="InventoryGodot"
