@@ -12,24 +12,45 @@ public partial class InventoryScreenItem : Button
 
     public override void _Ready()
     {
-        GetNode<TextureRect>("Icon").Texture = null;
-        GetNode<Label>("Quantity").Text = "";
-        GetNode<Control>("Detail").Hide();
+        empty();
     }
 
-    private void onMouseEntered()
+    public override bool _CanDropData(Vector2 atPosition, Variant data)
+    {
+        return true;
+    }
+
+    public override void _DropData(Vector2 atPosition, Variant data)
+    {
+        InventoryScreenItem inventoryScreenItem = (InventoryScreenItem)data;
+        ItemData inventoryScreenItemItemData = inventoryScreenItem.ItemData;
+        inventoryScreenItem.ItemData = ItemData;
+        ItemData = inventoryScreenItemItemData;
+        ButtonPressed = true;
+        GrabFocus();
+    }
+
+    public override Variant _GetDragData(Vector2 atPosition)
     {
         if (ItemData == null)
         {
-            return;
+            return false;
         }
 
-        GetNode<Control>("Detail").Show();
+        TextureRect dragPreview = new();
+        dragPreview.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+        dragPreview.Texture = ItemData.Icon;
+        dragPreview.Size = new(32, 32);
+        SetDragPreview(dragPreview);
+        return this;
     }
 
-    private void onMouseExited()
+    private void empty()
     {
-        GetNode<Control>("Detail").Hide();
+        FocusMode = FocusModeEnum.None;
+        MouseDefaultCursorShape = CursorShape.Arrow;
+        GetNode<TextureRect>("Icon").Texture = null;
+        GetNode<Label>("Quantity").Text = "";
     }
 
     private void setItemData(ItemData itemData)
@@ -38,15 +59,13 @@ public partial class InventoryScreenItem : Button
 
         if (ItemData == null)
         {
-            MouseDefaultCursorShape = CursorShape.Arrow;
+            empty();
             return;
         }
 
+        FocusMode = FocusModeEnum.All;
         MouseDefaultCursorShape = CursorShape.PointingHand;
         GetNode<TextureRect>("Icon").Texture = ItemData.Icon;
         GetNode<Label>("Quantity").Text = ItemData.Quantity.ToString();
-        GetNode<Label>("Detail/Name").Text = ItemData.ResourceName;
-        GetNode<TextureRect>("Detail/Icon").Texture = ItemData.Icon;
-        GetNode<Label>("Detail/Description").Text = ItemData.Description;
     }
 }
