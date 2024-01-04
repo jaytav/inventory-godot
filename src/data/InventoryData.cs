@@ -27,12 +27,33 @@ public partial class InventoryData : Resource
         itemData = (ItemData)itemData.Duplicate();
         Items[nextAvailableItemSlot] = itemData;
         EmitSignal(nameof(ItemAdded), itemData);
+        ResourceSaver.Save(this);
     }
 
     public void RemoveItem(ItemData itemData)
     {
-        Items.Remove(itemData);
+        int itemSlot = Items.IndexOf(itemData);
+        Items[itemSlot] = null;
+
         EmitSignal(nameof(ItemRemoved), itemData);
+        ResourceSaver.Save(this);
+    }
+
+    public void MoveItem(ItemData itemData, int itemSlot)
+    {
+        int itemDataItemSlot = Items.IndexOf(itemData);
+
+        if (Items[itemSlot] == null)
+        {
+            Items[itemDataItemSlot] = null;
+        }
+        else
+        {
+            Items[itemDataItemSlot] = Items[itemSlot];
+        }
+
+        Items[itemSlot] = itemData;
+        ResourceSaver.Save(this);
     }
 
     private int getNextAvailableItemSlot()

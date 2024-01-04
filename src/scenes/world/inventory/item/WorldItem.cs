@@ -13,7 +13,9 @@ public partial class WorldItem : Node2D
             return;
         }
 
+        ItemData.QuantityUpdated += onItemDataQuantityUpdated;
         GetNode<Sprite2D>("Icon").Texture = ItemData.Icon;
+        GetNode<Label>("UI/Quantity").Text = ItemData.Quantity.ToString();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -55,5 +57,10 @@ public partial class WorldItem : Node2D
         newPosition.X = Mathf.Lerp(currentPosition.X, to.X, 20 * (float)delta);
         newPosition.Y = Mathf.Lerp(currentPosition.Y, to.Y, 20 * (float)delta);
         GlobalPosition = newPosition;
+    }
+
+    private void onItemDataQuantityUpdated(ItemData itemData, int quantity)
+    {
+        GetNode<Label>("UI/Quantity").Text = quantity.ToString();
     }
 }

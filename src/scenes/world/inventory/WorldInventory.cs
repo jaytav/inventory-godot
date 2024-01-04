@@ -68,15 +68,29 @@ public partial class WorldInventory : Node2D
             }
 
             WorldItemSlot hoveredWorldItemSlot = _hoveredWorldItemSlots[0];
-            WorldItem hoveredWorldItem = hoveredWorldItemSlot.GetNodeOrNull<WorldItem>("WorldItem");
-
             WorldItemSlot selectedWorldItemSlot = selectedWorldItem.GetParent<WorldItemSlot>();
+
+            if (hoveredWorldItemSlot == selectedWorldItemSlot)
+            {
+                return;
+            }
+
+            InventoryData.MoveItem(selectedWorldItem.ItemData, hoveredWorldItemSlot.GetIndex());
+            WorldItem hoveredWorldItem = hoveredWorldItemSlot.GetNodeOrNull<WorldItem>("WorldItem");
             selectedWorldItem.Reparent(hoveredWorldItemSlot);
 
             if (hoveredWorldItem != null)
             {
-                hoveredWorldItem.Reparent(selectedWorldItemSlot);
-                hoveredWorldItem.Name = "WorldItem";
+                if (hoveredWorldItem.ItemData.ResourceName == selectedWorldItem.ItemData.ResourceName)
+                {
+                    hoveredWorldItem.ItemData.Quantity += selectedWorldItem.ItemData.Quantity;
+                    selectedWorldItem.QueueFree();
+                }
+                else
+                {
+                    hoveredWorldItem.Reparent(selectedWorldItemSlot);
+                    hoveredWorldItem.Name = "WorldItem";
+                }
             }
 
             selectedWorldItem.Name = "WorldItem";
