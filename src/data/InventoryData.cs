@@ -43,17 +43,17 @@ public partial class InventoryData : Resource
     {
         int itemDataItemSlot = Items.IndexOf(itemData);
 
-        if (Items[itemSlot] == null)
+        if (Items[itemSlot] == null) // moving into empty slot
         {
             Items[itemDataItemSlot] = null;
             Items[itemSlot] = itemData;
         }
-        else if (Items[itemSlot].ResourceName == itemData.ResourceName)
+        else if (Items[itemSlot].ResourceName == itemData.ResourceName) // moving into slot of same item
         {
             Items[itemDataItemSlot] = null;
             Items[itemSlot].Quantity += itemData.Quantity;
         }
-        else
+        else // moving into slot of another item
         {
             Items[itemDataItemSlot] = Items[itemSlot];
             Items[itemSlot] = itemData;
@@ -64,7 +64,7 @@ public partial class InventoryData : Resource
 
     public void SplitItem(ItemData itemData, int quantity)
     {
-        if (itemData.Quantity < quantity)
+        if (itemData.Quantity <= quantity)
         {
             return;
         }

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldInventory.cs" id="1_3tvra"]
 [ext_resource type="PackedScene" uid="uid://b82irkfat52qa" path="res://src/scenes/world/inventory/item/WorldItemSlot.tscn" id="2_0x60g"]
-[ext_resource type="Resource" uid="uid://bdpn0e3pehk6b" path="res://data/inventory/test_inventory_0.tres" id="2_rl3yt"]
+[ext_resource type="Resource" uid="uid://dm8a0c7wmo0i1" path="res://data/inventory/test_inventory_0.tres" id="2_rl3yt"]
 [ext_resource type="AudioStream" uid="uid://bs8b7frsuga25" path="res://assets/audio/pop.wav" id="3_2wxxg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w2twb"]
