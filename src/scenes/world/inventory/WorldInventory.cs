@@ -48,6 +48,7 @@ public partial class WorldInventory : Node2D
                 return;
             }
 
+            playSound(1.5f);
             WorldItem selectedWorldItem = _hoveredWorldItems[0];
             _selectedWorldItems.Add(selectedWorldItem);
             selectedWorldItem.ToggleFollow();
@@ -76,6 +77,7 @@ public partial class WorldInventory : Node2D
                 return;
             }
 
+            playSound(0.5f);
             InventoryData.MoveItem(selectedWorldItem.ItemData, hoveredWorldItemSlot.GetIndex());
             WorldItem hoveredWorldItem = hoveredWorldItemSlot.GetNodeOrNull<WorldItem>("WorldItem");
             selectedWorldItem.Reparent(hoveredWorldItemSlot);
@@ -105,6 +107,12 @@ public partial class WorldInventory : Node2D
             WorldItem selectedWorldItem = _hoveredWorldItems[0];
             InventoryData.SplitItem(selectedWorldItem.ItemData, 1);
         }
+    }
+
+    private void playSound(float pitch)
+    {
+        GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D").PitchScale = pitch;
+        GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D").Play();
     }
 
     private void onInventoryDataItemAdded(ItemData itemData, int itemSlot)

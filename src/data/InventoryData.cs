@@ -69,6 +69,12 @@ public partial class InventoryData : Resource
             return;
         }
 
+        // prevent splitting with no available item slots
+        if (getNextAvailableItemSlot() == -1)
+        {
+            return;
+        }
+
         itemData.Quantity -= quantity;
         ItemData splitItemData = (ItemData)itemData.Duplicate();
         splitItemData.Quantity = quantity;
