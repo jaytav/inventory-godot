@@ -4,4 +4,7 @@
 
 [node name="World" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(96, 96)
+
 [node name="WorldInventory" parent="." instance=ExtResource("1_0pc1n")]

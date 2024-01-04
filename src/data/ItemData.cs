@@ -2,6 +2,9 @@ using Godot;
 
 public partial class ItemData : Resource
 {
+    [Signal]
+    public delegate void FocusedEventHandler();
+
     [Export]
     public int Quantity = 1;
 

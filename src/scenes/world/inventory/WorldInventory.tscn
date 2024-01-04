@@ -1,12 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://cryr4qggnp7ph"]
+[gd_scene load_steps=5 format=3 uid="uid://cryr4qggnp7ph"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldInventory.cs" id="1_3tvra"]
+[ext_resource type="PackedScene" uid="uid://b82irkfat52qa" path="res://src/scenes/world/inventory/item/WorldItemSlot.tscn" id="2_0x60g"]
 [ext_resource type="Resource" uid="uid://cvyorxitw402r" path="res://data/inventory/test_inventory_0.tres" id="2_rl3yt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w2twb"]
+radius = 0.01
 
 [node name="WorldInventory" type="Node2D"]
 script = ExtResource("1_3tvra")
-_inventoryData = ExtResource("2_rl3yt")
+InventoryData = ExtResource("2_rl3yt")
 
-[node name="Items" type="Node2D" parent="."]
+[node name="ItemSlots" type="Node2D" parent="."]
 
-[node name="Slots" type="Node2D" parent="."]
+[node name="WorldItemSlot" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(32, 32)
+
+[node name="WorldItemSlot2" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(96, 32)
+
+[node name="WorldItemSlot3" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(160, 32)
+
+[node name="WorldItemSlot4" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(32, 96)
+
+[node name="WorldItemSlot5" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(96, 96)
+
+[node name="WorldItemSlot6" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(160, 96)
+
+[node name="WorldItemSlot7" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(32, 160)
+
+[node name="WorldItemSlot8" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(96, 160)
+
+[node name="WorldItemSlot9" parent="ItemSlots" instance=ExtResource("2_0x60g")]
+position = Vector2(160, 160)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_w2twb")
+
+[connection signal="area_entered" from="Area2D" to="." method="onArea2DAreaEntered"]
+[connection signal="area_exited" from="Area2D" to="." method="onArea2DAreaExited"]

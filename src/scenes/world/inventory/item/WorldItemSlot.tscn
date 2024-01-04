@@ -1,12 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://b82irkfat52qa"]
+[gd_scene load_steps=5 format=3 uid="uid://b82irkfat52qa"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/item/WorldItemSlot.cs" id="1_vp6dj"]
 [ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/square.svg" id="2_4beax"]
+[ext_resource type="Texture2D" uid="uid://dyql3gjbr5vll" path="res://assets/textures/square_outline.svg" id="3_irhtv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xkcx"]
+size = Vector2(64, 64)
 
 [node name="WorldItemSlot" type="Node2D"]
 script = ExtResource("1_vp6dj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.156863, 0.156863, 0.156863, 1)
-scale = Vector2(0.125, 0.125)
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(0.109375, 0.109375)
 texture = ExtResource("2_4beax")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1.90735e-06, -2.26498e-06)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_irhtv")
+
+[node name="WorldItemGhost" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.392157)
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("2_4beax")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6xkcx")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="onArea2DMouseEntered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="onArea2DMouseExited"]
