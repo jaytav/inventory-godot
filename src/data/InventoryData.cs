@@ -4,7 +4,7 @@ using Godot.Collections;
 public partial class InventoryData : Resource
 {
     [Signal]
-    public delegate void ItemAddedEventHandler(ItemData itemData);
+    public delegate void ItemAddedEventHandler(ItemData itemData, int itemSlot);
 
     [Signal]
     public delegate void ItemRemovedEventHandler(ItemData itemData);
@@ -26,7 +26,7 @@ public partial class InventoryData : Resource
         // changes to this item. E.g. Quantity updates
         itemData = (ItemData)itemData.Duplicate();
         Items[nextAvailableItemSlot] = itemData;
-        EmitSignal(nameof(ItemAdded), itemData);
+        EmitSignal(nameof(ItemAdded), itemData, nextAvailableItemSlot);
         ResourceSaver.Save(this);
     }
 
@@ -46,14 +46,33 @@ public partial class InventoryData : Resource
         if (Items[itemSlot] == null)
         {
             Items[itemDataItemSlot] = null;
+            Items[itemSlot] = itemData;
+        }
+        else if (Items[itemSlot].ResourceName == itemData.ResourceName)
+        {
+            Items[itemDataItemSlot] = null;
+            Items[itemSlot].Quantity += itemData.Quantity;
         }
         else
         {
             Items[itemDataItemSlot] = Items[itemSlot];
+            Items[itemSlot] = itemData;
         }
 
-        Items[itemSlot] = itemData;
         ResourceSaver.Save(this);
+    }
+
+    public void SplitItem(ItemData itemData, int quantity)
+    {
+        if (itemData.Quantity < quantity)
+        {
+            return;
+        }
+
+        itemData.Quantity -= quantity;
+        ItemData splitItemData = (ItemData)itemData.Duplicate();
+        splitItemData.Quantity = quantity;
+        AddItem(splitItemData);
     }
 
     private int getNextAvailableItemSlot()

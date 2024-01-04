@@ -18,6 +18,7 @@ public partial class WorldInventory : Node2D
 
     public override void _Ready()
     {
+        InventoryData.ItemAdded += onInventoryDataItemAdded;
         _area = GetNode<Area2D>("Area2D");
 
         for (int i = 0; i < InventoryData.Items.Count; i++)
@@ -83,7 +84,6 @@ public partial class WorldInventory : Node2D
             {
                 if (hoveredWorldItem.ItemData.ResourceName == selectedWorldItem.ItemData.ResourceName)
                 {
-                    hoveredWorldItem.ItemData.Quantity += selectedWorldItem.ItemData.Quantity;
                     selectedWorldItem.QueueFree();
                 }
                 else
@@ -95,6 +95,25 @@ public partial class WorldInventory : Node2D
 
             selectedWorldItem.Name = "WorldItem";
         }
+        else if (@event.IsActionPressed("ActionSecondary"))
+        {
+            if (_hoveredWorldItems.Count == 0)
+            {
+                return;
+            }
+
+            WorldItem selectedWorldItem = _hoveredWorldItems[0];
+            InventoryData.SplitItem(selectedWorldItem.ItemData, 1);
+        }
+    }
+
+    private void onInventoryDataItemAdded(ItemData itemData, int itemSlot)
+    {
+        WorldItem worldItem = _worldItem.Instantiate<WorldItem>();
+        worldItem.ItemData = itemData;
+
+        WorldItemSlot worldItemSlot = GetNode("ItemSlots").GetChild<WorldItemSlot>(itemSlot);
+        worldItemSlot.AddChild(worldItem);
     }
 
     private void onArea2DAreaEntered(Area2D area)
