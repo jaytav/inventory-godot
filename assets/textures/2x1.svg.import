@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyql3gjbr5vll"
-path="res://.godot/imported/square_outline.svg-190736312fbe4bb5ef712894e5f887c9.ctex"
+uid="uid://dk754tttqnsc3"
+path="res://.godot/imported/2x1.svg-c181f17820e569c8a5bc1adeab4fba5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/square_outline.svg"
-dest_files=["res://.godot/imported/square_outline.svg-190736312fbe4bb5ef712894e5f887c9.ctex"]
+source_file="res://assets/textures/2x1.svg"
+dest_files=["res://.godot/imported/2x1.svg-c181f17820e569c8a5bc1adeab4fba5c.ctex"]
 
 [params]
 
