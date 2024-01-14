@@ -4,10 +4,10 @@ using Godot.Collections;
 public partial class InventoryData : Resource
 {
     [Export]
-    public Array<ItemData> Items = new();
+    public Array<ItemSlotData> ItemSlots = new();
 
-    public void AddItem(ItemData item)
+    public void AddSlot()
     {
-        Items.Add(item);
+        ItemSlots.Add(new());
     }
 }
