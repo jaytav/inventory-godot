@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://rd5qevltwuwc"]
+[gd_scene load_steps=4 format=3 uid="uid://rd5qevltwuwc"]
 
 [ext_resource type="Script" path="res://src/scenes/inventory/ItemSlot.cs" id="1_2ni86"]
+[ext_resource type="PackedScene" uid="uid://dxggmditbxrys" path="res://src/scenes/inventory/Item.tscn" id="2_6wbqi"]
 [ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/1x1.svg" id="2_mo2q0"]
 
 [node name="ItemSlot" type="Node2D"]
 script = ExtResource("1_2ni86")
+
+[node name="Item" parent="." instance=ExtResource("2_6wbqi")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.196078)

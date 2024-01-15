@@ -1,31 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cedww2t0hxisg"]
+[gd_scene load_steps=3 format=3 uid="uid://cedww2t0hxisg"]
 
 [ext_resource type="Script" path="res://src/scenes/inventory/Inventory.cs" id="1_xvjx6"]
-[ext_resource type="Resource" uid="uid://deopacjx0rb1k" path="res://data/inventory/inventory_a.tres" id="2_ddnac"]
-[ext_resource type="PackedScene" uid="uid://rd5qevltwuwc" path="res://src/scenes/inventory/ItemSlot.tscn" id="3_kdn01"]
-[ext_resource type="PackedScene" uid="uid://dxggmditbxrys" path="res://src/scenes/inventory/Item.tscn" id="4_sk2jy"]
-[ext_resource type="Texture2D" uid="uid://dk754tttqnsc3" path="res://assets/textures/2x1.svg" id="5_tnq6g"]
+[ext_resource type="Resource" uid="uid://dqook3me85b8" path="res://data/inventory/inventory_a.tres" id="2_ddnac"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_xvjx6")
 InventoryData = ExtResource("2_ddnac")
 
-[node name="ItemSlot" parent="." instance=ExtResource("3_kdn01")]
-position = Vector2(-64, 0)
-
-[node name="ItemSlot2" parent="." instance=ExtResource("3_kdn01")]
-
-[node name="ItemSlot3" parent="." instance=ExtResource("3_kdn01")]
-position = Vector2(64, 0)
-
-[node name="Item" parent="." instance=ExtResource("4_sk2jy")]
-position = Vector2(-32, 0)
-
-[node name="Sprite2D" parent="Item" index="0"]
-position = Vector2(3.8147e-06, 3.8147e-06)
-texture = ExtResource("5_tnq6g")
-
-[node name="Item2" parent="." instance=ExtResource("4_sk2jy")]
-position = Vector2(64, 0)
-
-[editable path="Item"]
+[node name="ItemSlots" type="Node2D" parent="."]
