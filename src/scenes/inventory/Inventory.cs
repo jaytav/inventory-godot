@@ -56,6 +56,11 @@ public partial class Inventory : Node2D
             selectedItem.Reparent(hoveredItemSlot);
             hoveredItem.Name = "Item";
         }
+        else if (@event.IsActionPressed("RotateItem") && _selectedItems.Count > 0)
+        {
+            Item selectedItem = _selectedItems[0];
+            selectedItem.ItemData.Rotation += 90;
+        }
     }
 
     private void InitialiseSceneNodes()

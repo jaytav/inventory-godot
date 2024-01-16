@@ -26,6 +26,9 @@ public partial class Item : Node2D
     {
         Vector2 position = IsDragging ? GetGlobalMousePosition() : GetParent<Node2D>().GlobalPosition;
         MoveTowards(position, delta);
+
+        float rotation = ItemData?.Rotation ?? 0;
+        RotateTowards(rotation, delta);
     }
 
     private void InitialiseSceneNodes()
@@ -41,6 +44,11 @@ public partial class Item : Node2D
         newPosition.X = Mathf.Lerp(currentPosition.X, position.X, 20 * (float)delta);
         newPosition.Y = Mathf.Lerp(currentPosition.Y, position.Y, 20 * (float)delta);
         GlobalPosition = newPosition;
+    }
+
+    private void RotateTowards(float rotation, double delta)
+    {
+        GlobalRotation = Mathf.LerpAngle(GlobalRotation, Mathf.DegToRad(rotation), 0.25f);
     }
 
     /**
