@@ -9,4 +9,3 @@
 [node name="Inventory" parent="World" instance=ExtResource("1_gymj0")]
 
 [node name="Camera2D" type="Camera2D" parent="World"]
-zoom = Vector2(2, 2)

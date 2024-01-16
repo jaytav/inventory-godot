@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Item : Node2D
 {
@@ -14,12 +15,24 @@ public partial class Item : Node2D
     public bool IsDragging;
 
     // Scene nodes
+    private Area2D _area;
     private Sprite2D _icon;
 
     public override void _EnterTree()
     {
         InitialiseSceneNodes();
         _icon.Texture = ItemData?.Icon;
+        Array<Vector2> cells = ItemData?.Cells ?? new();
+
+        foreach (Vector2 cell in cells)
+        {
+            CollisionShape2D areaCollisionShape = new();
+            RectangleShape2D areaCollisionShapeShape = new();
+            areaCollisionShapeShape.Size = new(64, 64);
+            areaCollisionShape.Shape = areaCollisionShapeShape;
+            areaCollisionShape.GlobalPosition = cell * 64;
+            _area.AddChild(areaCollisionShape);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -33,6 +46,7 @@ public partial class Item : Node2D
 
     private void InitialiseSceneNodes()
     {
+        _area = GetNode<Area2D>("Area");
         _icon = GetNode<Sprite2D>("Icon");
     }
 

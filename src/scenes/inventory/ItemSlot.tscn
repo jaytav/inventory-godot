@@ -19,6 +19,7 @@ shape = SubResource("RectangleShape2D_tsmjx")
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.196078)
+z_index = -1
 rotation = 0.00248595
 scale = Vector2(0.109375, 0.109375)
 texture = ExtResource("2_mo2q0")

@@ -58,6 +58,7 @@ public partial class Inventory : Node2D
         }
         else if (@event.IsActionPressed("RotateItem") && _selectedItems.Count > 0)
         {
+            // Rotate item
             Item selectedItem = _selectedItems[0];
             selectedItem.ItemData.Rotation += 90;
         }

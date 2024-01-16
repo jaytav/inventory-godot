@@ -1,18 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxggmditbxrys"]
+[gd_scene load_steps=3 format=3 uid="uid://dxggmditbxrys"]
 
 [ext_resource type="Script" path="res://src/scenes/inventory/Item.cs" id="1_mvbok"]
 [ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/1x1.svg" id="1_pj7jd"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mx3j"]
-size = Vector2(64, 64)
 
 [node name="Item" type="Node2D"]
 script = ExtResource("1_mvbok")
 
 [node name="Area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
-shape = SubResource("RectangleShape2D_4mx3j")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, -4.76837e-07)
