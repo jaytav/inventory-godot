@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhjrui1dvky6p"]
+
+[ext_resource type="PackedScene" uid="uid://dkvv3djm4yp8k" path="res://src/scenes/world/inventory/WorldInventory.tscn" id="1_m0kkw"]
+
+[node name="World" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="WorldInventory" parent="." instance=ExtResource("1_m0kkw")]

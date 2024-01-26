@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1vcrbb0gji1r"]
+
+[ext_resource type="Script" path="res://src/scenes/world/inventory/item_slot/WorldItemSlot.cs" id="1_rsl5t"]
+
+[node name="WorldItemSlot" type="Node2D"]
+script = ExtResource("1_rsl5t")
