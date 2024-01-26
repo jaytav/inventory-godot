@@ -31,6 +31,22 @@ public partial class WorldItemSlotGroup : Node2D
         RefreshArea();
     }
 
+    private void Highlight()
+    {
+        foreach (WorldItemSlot worldItemSlot in _itemSlots.GetChildren())
+        {
+            worldItemSlot.Highlight();
+        }
+    }
+
+    private void Unhighlight()
+    {
+        foreach (WorldItemSlot worldItemSlot in _itemSlots.GetChildren())
+        {
+            worldItemSlot.Unhighlight();
+        }
+    }
+
     private void RefreshArea()
     {
         foreach (WorldItemSlot worldItemSlot in _itemSlots.GetChildren())
@@ -48,5 +64,18 @@ public partial class WorldItemSlotGroup : Node2D
     {
         _area = GetNode<Area2D>("Area");
         _itemSlots = GetNode<Node2D>("ItemSlots");
+    }
+
+    /**
+    * Signal receivers
+    */
+    private void OnAreaMouseEntered()
+    {
+        Highlight();
+    }
+
+    private void OnAreaMouseExited()
+    {
+        Unhighlight();
     }
 }

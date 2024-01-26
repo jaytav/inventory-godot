@@ -15,6 +15,16 @@ public partial class WorldItemSlot : Node2D
         InitialiseSceneNodes();
     }
 
+    public void Highlight()
+    {
+        _highlight.Visible = true;
+    }
+
+    public void Unhighlight()
+    {
+        _highlight.Visible = false;
+    }
+
     private void InitialiseSceneNodes()
     {
         _highlight = GetNode<Sprite2D>("Highlight");

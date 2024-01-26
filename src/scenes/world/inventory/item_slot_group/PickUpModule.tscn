@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnjv7uwt3xofp"]
+
+[ext_resource type="Script" path="res://src/scenes/world/inventory/item_slot_group/PickUpModule.cs" id="1_f6qio"]
+
+[node name="PickUpModule" type="Node2D"]
+script = ExtResource("1_f6qio")
