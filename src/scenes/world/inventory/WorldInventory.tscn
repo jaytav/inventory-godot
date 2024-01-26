@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkvv3djm4yp8k"]
+[gd_scene load_steps=3 format=3 uid="uid://dkvv3djm4yp8k"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldInventory.cs" id="1_g5hwd"]
+[ext_resource type="PackedScene" uid="uid://bdcbkqoujy4hx" path="res://src/scenes/world/inventory/item_slot_group/WorldItemSlotGroup.tscn" id="2_lxgkn"]
 
 [node name="WorldInventory" type="Node2D"]
 script = ExtResource("1_g5hwd")
+
+[node name="ItemSlotGroups" type="Node2D" parent="."]
+
+[node name="WorldItemSlotGroup" parent="ItemSlotGroups" instance=ExtResource("2_lxgkn")]
