@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://c7cxy02db55l1"]
+[gd_scene load_steps=2 format=3 uid="uid://c7cxy02db55l1"]
+
+[ext_resource type="PackedScene" uid="uid://duxa70pcu1eb8" path="res://src/scenes/world/inventory/WorldInventory.tscn" id="1_6lpyn"]
 
 [node name="World" type="Node2D"]
+
+[node name="WorldInventory" parent="." instance=ExtResource("1_6lpyn")]
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

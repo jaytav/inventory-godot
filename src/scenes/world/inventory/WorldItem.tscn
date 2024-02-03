@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cejdvdnkub6j8"]
+[gd_scene load_steps=3 format=3 uid="uid://cejdvdnkub6j8"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldItem.cs" id="1_mcubo"]
+[ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/1x1.svg" id="2_v1lrf"]
 
 [node name="WorldItem" type="Node2D"]
 script = ExtResource("1_mcubo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-1.43051e-06, -1.43051e-06)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_v1lrf")

@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7qqg2iao1ho7"]
+[gd_scene load_steps=3 format=3 uid="uid://c7qqg2iao1ho7"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldItemSlot.cs" id="1_ij5pc"]
+[ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/1x1.svg" id="2_yygf8"]
 
 [node name="WorldItemSlot" type="Node2D"]
 script = ExtResource("1_ij5pc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_yygf8")
