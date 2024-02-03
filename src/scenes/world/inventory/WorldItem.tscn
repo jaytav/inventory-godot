@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cejdvdnkub6j8"]
+[gd_scene load_steps=4 format=3 uid="uid://cejdvdnkub6j8"]
 
 [ext_resource type="Script" path="res://src/scenes/world/inventory/WorldItem.cs" id="1_mcubo"]
 [ext_resource type="Texture2D" uid="uid://bc0t206k3aae7" path="res://assets/textures/1x1.svg" id="2_v1lrf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7wqw"]
+size = Vector2(64, 64)
 
 [node name="WorldItem" type="Node2D"]
 script = ExtResource("1_mcubo")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-1.43051e-06, -1.43051e-06)
-scale = Vector2(0.75, 0.75)
+modulate = Color(0.0588235, 0.0901961, 0.164706, 1)
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_v1lrf")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_a7wqw")
