@@ -6,6 +6,7 @@ public partial class WorldInventory : Node2D
     [Export]
     public Inventory Inventory;
 
+    private WorldItem _carriedWorldItem;
     private Array<WorldItem> _hoveredWorldItems = new();
     private Array<WorldItemSlot> _hoveredWorldItemSlots = new();
 
@@ -26,14 +27,16 @@ public partial class WorldInventory : Node2D
         foreach (Vector2 itemPosition in Inventory.Items.Keys)
         {
             WorldItem worldItem = _worldItem.Instantiate<WorldItem>();
-            worldItem.Position = itemPosition * 64;
+            worldItem.Item = Inventory.Items[itemPosition];
+            worldItem.Item.Position = itemPosition;
             _items.AddChild(worldItem);
         }
 
         foreach (Vector2 itemSlotPosition in Inventory.ItemSlots.Keys)
         {
             WorldItemSlot worldItemSlot = _worldItemSlot.Instantiate<WorldItemSlot>();
-            worldItemSlot.Position = itemSlotPosition * 64;
+            worldItemSlot.ItemSlot = Inventory.ItemSlots[itemSlotPosition];
+            worldItemSlot.ItemSlot.Position = itemSlotPosition;
             _itemSlots.AddChild(worldItemSlot);
         }
     }
@@ -41,6 +44,25 @@ public partial class WorldInventory : Node2D
     public override void _Process(double delta)
     {
         _mouseArea.GlobalPosition = GetGlobalMousePosition();
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("ActionPrimary") && _hoveredWorldItems.Count > 0)
+        {
+            _carriedWorldItem = _hoveredWorldItems[0];
+            _carriedWorldItem.FollowMouse = true;
+        }
+        else if (@event.IsActionReleased("ActionPrimary") && _carriedWorldItem != null)
+        {
+            if (_hoveredWorldItemSlots.Count > 0)
+            {
+                Inventory.MoveItem(_carriedWorldItem.Item.Position, _hoveredWorldItemSlots[0].ItemSlot.Position);
+            }
+
+            _carriedWorldItem.FollowMouse = false;
+            _carriedWorldItem = null;
+        }
     }
 
     private void InitialiseSceneNodes()
@@ -62,6 +84,11 @@ public partial class WorldInventory : Node2D
         {
             foreach (WorldItem hoveredWorldItem in _hoveredWorldItems)
             {
+                if (hoveredWorldItem == _carriedWorldItem)
+                {
+                    continue;
+                }
+
                 hoveredWorldItem.Unhighlight();
             }
 
