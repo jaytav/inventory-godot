@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duxa70pcu1eb8"]
+
+[ext_resource type="Script" path="res://src/scenes/world/inventory/WorldInventory.cs" id="1_g5hwd"]
+
+[node name="WorldInventory" type="Node2D"]
+script = ExtResource("1_g5hwd")
